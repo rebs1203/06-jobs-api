@@ -1,4 +1,4 @@
-import { showGroceries } from "./groceries";
+import { showGroceries } from "./groceries.js";
 
 let name = null;
 let createdBy = null;
@@ -6,8 +6,8 @@ let status = null;
 let deleteProduct = null;
 
 export const handleDelete = () => {
-    name = document.getElementById("company");
-    createdBy = document.getElementById("position");
+    name = document.getElementById("name");
+    createdBy = document.getElementById("addedby");
     status = document.getElementById("status");
     deleteProduct = document.getElementsByClassName("deleteButton");
 

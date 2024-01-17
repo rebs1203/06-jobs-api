@@ -1,5 +1,5 @@
 import { enableInput, inputEnabled, message, setDiv, token } from "./index.js";
-import { showGroceries } from "./groceries";
+import { showGroceries } from "./groceries.js";
 
 let addEditDiv = null;
 let name = null;
@@ -8,11 +8,11 @@ let status = null;
 let addingProduct = null;
 
 export const handleAddEdit = () => {
-  addEditDiv = document.getElementById("edit-job");
-  name = document.getElementById("company");
-  createdBy = document.getElementById("position");
+  addEditDiv = document.getElementById("edit-groceries");
+  name = document.getElementById("name");
+  createdBy = document.getElementById("addedby");
   status = document.getElementById("status");
-  addingProduct = document.getElementById("adding-job");
+  addingProduct = document.getElementById("adding-product");
   const editCancel = document.getElementById("edit-cancel");
 
   addEditDiv.addEventListener("click", async (e) => {

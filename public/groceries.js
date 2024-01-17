@@ -14,11 +14,11 @@ import {
   let groceriesTableHeader = null;
   
   export const handleProducts = () => {
-    groceriesDiv = document.getElementById("jobs");
+    groceriesDiv = document.getElementById("groceries");
     const logoff = document.getElementById("logoff");
-    const addProduct = document.getElementById("add-job");
-    groceriesTable = document.getElementById("jobs-table");
-    groceriesTableHeader = document.getElementById("jobs-table-header");
+    const addProduct = document.getElementById("add-product");
+    groceriesTable = document.getElementById("groceries-table");
+    groceriesTableHeader = document.getElementById("groceries-table-header");
   
     groceriesDiv.addEventListener("click", (e) => {
       if (inputEnabled && e.target.nodeName === "BUTTON") {
@@ -29,7 +29,7 @@ import {
     
             message.textContent = "You have been logged off.";
     
-            jobsTable.replaceChildren([jobsTableHeader]);
+            groceriesTable.replaceChildren([groceriesTableHeader]);
     
             showLoginRegister();
         } else if (e.target.classList.contains("editButton")) {
@@ -59,7 +59,7 @@ import {
         if (data.count === 0) {
           groceriesTable.replaceChildren(...children); // clear this for safety
         } else {
-          for (let i = 0; i < data.jobs.length; i++) {
+          for (let i = 0; i < data.products.length; i++) {
             let rowEntry = document.createElement("tr");
   
             let editButton = `<td><button type="button" class="editButton" data-id=${data.groceries[i]._id}>edit</button></td>`;
