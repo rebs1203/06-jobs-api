@@ -8,6 +8,7 @@ import {
   } from "./index.js";
   import { showLoginRegister } from "./loginRegister.js";
   import { showAddEdit } from "./addEdit.js";
+  import { handleDelete } from "./delete.js";
   
   let groceriesDiv = null;
   let groceriesTable = null;
@@ -35,7 +36,10 @@ import {
         } else if (e.target.classList.contains("editButton")) {
             message.textContent = "";
             showAddEdit(e.target.dataset.id);
-          }
+        } else if (e.target.classList.contains("deleteButton")) {
+            message.textContent = ""; 
+            handleDelete(e.target.dataset.id); 
+            }
       }
     });
   };
@@ -62,12 +66,12 @@ import {
           for (let i = 0; i < data.products.length; i++) {
             let rowEntry = document.createElement("tr");
   
-            let editButton = `<td><button type="button" class="editButton" data-id=${data.groceries[i]._id}>edit</button></td>`;
-            let deleteButton = `<td><button type="button" class="deleteButton" data-id=${data.groceries[i]._id}>delete</button></td>`;
+            let editButton = `<td><button type="button" class="editButton" data-id=${data.products[i]._id}>edit</button></td>`;
+            let deleteButton = `<td><button type="button" class="deleteButton" data-id=${data.products[i]._id}>delete</button></td>`;
             let rowHTML = `
-              <td>${data.groceries[i].name}</td>
-              <td>${data.groceries[i].status}</td>
-              <td>${data.groceries[i].createdBy}</td>
+              <td>${data.products[i].name}</td>
+              <td>${data.products[i].status}</td>
+              <td>${data.products[i].createdBy}</td>
               <div>${editButton}${deleteButton}</div>`;
   
             rowEntry.innerHTML = rowHTML;

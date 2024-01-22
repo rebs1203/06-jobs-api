@@ -9,8 +9,7 @@ let addingProduct = null;
 
 export const handleAddEdit = () => {
   addEditDiv = document.getElementById("edit-groceries");
-  name = document.getElementById("name");
-  createdBy = document.getElementById("addedby");
+  name = document.getElementById("productName");
   status = document.getElementById("status");
   addingProduct = document.getElementById("adding-product");
   const editCancel = document.getElementById("edit-cancel");
@@ -23,7 +22,7 @@ export const handleAddEdit = () => {
             let method = "POST";
             let url = "/api/v1/groceries";
           
-            if (addingJob.textContent === "update") {
+            if (addingProduct.textContent === "update") {
               method = "PATCH";
               url = `/api/v1/groceries/${addEditDiv.dataset.id}`;
             }
@@ -37,7 +36,6 @@ export const handleAddEdit = () => {
                 },
                 body: JSON.stringify({
                   name: name.value,
-                  createdBy: createdBy.value,
                   status: status.value,
                 }),
               });
@@ -51,14 +49,17 @@ export const handleAddEdit = () => {
                   // a 201 is expected for a successful create
                   message.textContent = "The job entry was created.";
                 }
-          
+
                 name.value = "";
-                createdBy.value = "";
                 status.value = "pending";
                 showGroceries();
-              } else {
+
+              } else if(e.target == editCancel) {
+                message.textContent = ""; 
+                showGroceries(); 
+                } else {
                 message.textContent = data.msg;
-              }
+              } 
             } catch (err) {
               console.log(err);
               message.textContent = "A communication error occurred.";
@@ -72,7 +73,6 @@ export const handleAddEdit = () => {
 export const showAddEdit = async (productId) => {
     if (!productId) {
       name.value = "";
-      createdBy.value = "";
       status.value = "pending";
       addingProduct.textContent = "add";
       message.textContent = "";
@@ -92,9 +92,8 @@ export const showAddEdit = async (productId) => {
   
         const data = await response.json();
         if (response.status === 200) {
-          name.value = data.groceries.name;
-          createdBy.value = data.groceries.createdBy;
-          status.value = data.groceries.status;
+          name.value = data.products.name;
+          status.value = data.products.status;
           addingProduct.textContent = "update";
           message.textContent = "";
           addEditDiv.dataset.id = productId;
