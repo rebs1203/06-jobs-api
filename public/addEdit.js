@@ -54,10 +54,7 @@ export const handleAddEdit = () => {
                 status.value = "pending";
                 showGroceries();
 
-              } else if(e.target == editCancel) {
-                message.textContent = ""; 
-                showGroceries(); 
-                } else {
+              } else {
                 message.textContent = data.msg;
               } 
             } catch (err) {
@@ -65,7 +62,10 @@ export const handleAddEdit = () => {
               message.textContent = "A communication error occurred.";
             }
             enableInput(true);
-          }
+          } else if(e.target == editCancel) {
+                message.textContent = ""; 
+                showGroceries(); 
+        }
     }
   });
 };
@@ -92,8 +92,8 @@ export const showAddEdit = async (productId) => {
   
         const data = await response.json();
         if (response.status === 200) {
-          name.value = data.products.name;
-          status.value = data.products.status;
+          name.value = data.product.name;
+          status.value = data.product.status;
           addingProduct.textContent = "update";
           message.textContent = "";
           addEditDiv.dataset.id = productId;
